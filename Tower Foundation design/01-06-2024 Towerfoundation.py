@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Jan  6 09:40:05 2025
 
-@author: vikra
+"""
+The design of the transmission tower mainly focused on vertical load (self-weight of tower and concrete foundation).
+Resisting force of wind and cable tension load.
+Based on both scenarios, the footing should be safe from bearing, sliding, and overturning.
 """
 import numpy as np
 import pandas as pd
@@ -13,7 +13,7 @@ import seaborn as sns
 class Tower_foundation:
     
     def __init__(self, t_ht,  c_pull ,fl, fh,  w_l = 47 ):  
-        "Cable pull force = 1.4 t (13 Kn) per phase and we have 3 phase in this condition"
+        "Cable pull force = 1.4 t (13 Kn) per phase and we have 3 phases in this condition"
         self.t_ht = t_ht
         self.t_load = 1110 #kg
         self.w_l = w_l
