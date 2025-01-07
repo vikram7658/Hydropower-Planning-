@@ -1,6 +1,8 @@
-# -- coding: utf-8 --
+
 """
-Optimal Rebar Design for Invert Slab
+Invert Lining design, for different water/pore pressure heads.
+The uplift force due to pore pressure develops a bending moment, which needs to be addressed to stop cracks from developing.
+Dowel placement will reduce the effective length, the max BM, and the need for a thick invert and additional rebar.
 """
 
 import pandas as pd
@@ -30,7 +32,7 @@ class Invert:
             AF = self.up_force() - self.down_force(t)  #0 Axial force (kN)
             BM = round(AF * self.L ** 2 / 8, 2)  # Bending moment (kNm) when single dowel is intnroduced
             SF = round(AF / (self.L * t), 2)  # Shear force (kN/m²)
-            d_eff = t - 0.05  # Effective depth (subtract0ing cover) 50 mm for structure in concrete
+            d_eff = t - 0.05  # Effective depth (subtracting cover) 50 mm for structure in water / concrete
             As = round((BM )*1000 / (0.87*self.fy * d_eff), 2)  # Steel area required (mm²)
             # space = 3*t*1000
             
@@ -52,7 +54,7 @@ class Invert:
 
     def rebar(self, As):
         """Find the optimal spacing and diameter for rebars."""
-        # for d in [10, 12, 16]:  # Available diameters
+        
         dia = [10,12,16,20,25]
         optimal_spacing = None
         opt_area = None
@@ -70,11 +72,9 @@ class Invert:
                 break
         return  optimal_spacing or "No valid spacing",optimal_dia or "No valid dia",  opt_area or "No valid T_area"  # If no suitable configuration is found
                 
-# Instantiate and calculate for cahnging invert width
+# Instantiate and calculate for changing invert width
 file_path = "Results_with_dowels.txt"
-# Open the file in write mode and write the results to it
 with open(file_path, "w") as file:
-    # file.write(results)
     for i in [3.8,1.9,0.95]: #dividing the invert width into different segments after dowel placement
         invert = Invert(h=1,L=i)
         results = (invert.moment_SS()).to_string(index=False)
@@ -84,9 +84,7 @@ with open(file_path, "w") as file:
         
 #instantiate for changing water head
 file_path = "Pore_water_with_dowels.txt"
-# Open the file in write mode and write the results to it
 with open(file_path, "w") as file:
-    # file.write(results)
     for i in np.arange(1,5,1): #for varying pore pressure head
         invert = Invert(h=i, L= 1.9)
         results = (invert.moment_SS()).to_string(index=False)
