@@ -29,9 +29,9 @@ def read_and_prepare_csv(file_path):
 
 # File paths for the CSVs (update these paths as needed)
 file_paths = [
-    r"C:\Users\vikra\OneDrive - htr\Bhotekoshi MPBX\MPBX\MPBX7.csv",
-    r"C:\Users\vikra\OneDrive - htr\Bhotekoshi MPBX\MPBX\MPBX8.csv",
-    r"C:\Users\vikra\OneDrive - htr\Bhotekoshi MPBX\MPBX\MPBX9.csv"
+    r"MPBX Data Interpretation/MPBX7.csv",
+    r"MPBX Data Interpretation/MPBX8.csv",
+    r"MPBX Data Interpretation/MPBX9.csv"
 ]
 
 # Read and prepare the dataframes (using all available files)
