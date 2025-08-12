@@ -94,7 +94,7 @@ def export_energy():
         "GH": 2386-2053}
     
     """  The path of CSV from the directory location"""
-    path =r"............\Dishcharge.csv"
+    path =r"Energy and Finance\Dishcharge.csv"
     
     test = Energy(**project)
     df_result = test.capacity(path)
@@ -108,3 +108,4 @@ def export_energy():
     return total_wet, total_dry
 
 print(export_energy())
+
